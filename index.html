@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="icon" href="data:,">
+<title>BEAM — Whatever the day may be.</title>
+<meta name="description" content="BEAM. The garment color represents the day. The drawcord represents the choice. The Jort — Charcoal Grey, Dusty Rose, Black, Bone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0D0D0D;
+    --ivory:#F4F0E8;
+    --charcoal:#2B2B2B;
+    --stone:#8B8B8B;
+    --gold:#B08D57;
+    --gold-deep:#8A6C42;
+    --serif:'Fraunces', serif;
+    --sans:'Archivo', sans-serif;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{
+    background:var(--ivory);
+    color:var(--charcoal);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{ font-weight:400; }
+  a{ color:inherit; }
+  button{ font:inherit; }
+  ul{ list-style:none; }
+  table{ border-collapse:collapse; }
+
+  .eyebrow{ display:inline-block; font-family:var(--sans); text-transform:uppercase; letter-spacing:.25em; font-size:.7rem; font-weight:600; color:var(--gold-deep); }
+  .btn{ display:inline-block; padding:.9em 2.1em; font-family:var(--sans); text-transform:uppercase; letter-spacing:.12em; font-size:.75rem; font-weight:600; border-radius:2px; cursor:pointer; transition:.25s ease; text-decoration:none; border:1px solid transparent; }
+  .btn-ghost{ border-color:var(--gold); color:var(--ivory); background:transparent; }
+  .btn-ghost:hover{ background:var(--gold); color:var(--black); }
+  .btn-dark{ background:var(--black); color:var(--ivory); border-color:var(--black); }
+  .btn-dark:hover{ background:var(--gold); border-color:var(--gold); color:var(--black); }
+  .btn:focus-visible, a:focus-visible, button:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  /* header */
+  #site-header{ position:sticky; top:0; z-index:1000; background:var(--black); border-bottom:1px solid rgba(244,240,232,.08); }
+  .nav-inner{ max-width:1280px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:1.1rem 1.5rem; gap:1rem; }
+  .logo{ font-family:var(--sans); font-weight:700; letter-spacing:.32em; font-size:1rem; color:var(--ivory); text-decoration:none; }
+  .nav-links{ display:flex; align-items:center; gap:1.75rem; }
+  .nav-links a{ font-family:var(--sans); font-size:.72rem; text-transform:uppercase; letter-spacing:.15em; color:var(--ivory); text-decoration:none; opacity:.75; transition:.2s; }
+  .nav-links a:hover, .nav-links a.active{ opacity:1; color:var(--gold); }
+  .nav-right{ display:flex; align-items:center; gap:.85rem; }
+  .lang-switch{ display:flex; gap:.5rem; }
+  .lang-btn{ background:none; border:none; color:var(--ivory); opacity:.55; font-family:var(--sans); font-size:.66rem; letter-spacing:.05em; cursor:pointer; padding:.2rem .25rem; }
+  .lang-btn:hover{ opacity:.9; }
+  .lang-btn.active{ opacity:1; color:var(--gold); }
+  .sound-btn{ background:none; border:none; color:var(--ivory); opacity:.7; cursor:pointer; padding:.3rem; display:flex; align-items:center; }
+  .sound-btn:hover{ opacity:1; }
+  .sound-btn.active{ opacity:1; color:var(--gold); }
+  #soundSlash{ transition:opacity .2s ease; }
+  .bag-btn{ font-family:var(--sans); font-size:.72rem; text-transform:uppercase; letter-spacing:.15em; background:none; border:1px solid rgba(244,240,232,.3); color:var(--ivory); padding:.55em 1.1em; cursor:pointer; border-radius:2px; white-space:nowrap; }
+  .bag-btn:hover{ border-color:var(--gold); color:var(--gold); }
+  .menu-toggle{ display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:.5rem; }
+  .menu-toggle span{ width:22px; height:1.5px; background:var(--ivory); display:block; }
+
+  /* mobile nav */
+  .mobile-nav{ position:fixed; inset:0; background:var(--black); z-index:1400; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2rem; transform:translateY(-100%); transition:.35s ease; }
+  .mobile-nav.open{ transform:translateY(0); }
+  .mobile-nav a{ color:var(--ivory); font-family:var(--sans); text-transform:uppercase; letter-spacing:.15em; font-size:1.15rem; text-decoration:none; }
+  .mobile-nav a:hover{ color:var(--gold); }
+  .mobile-nav .lang-switch{ margin-top:.5rem; }
+  .mobile-nav .lang-btn{ font-size:.78rem; }
+  .mobile-close{ position:absolute; top:1.5rem; right:1.5rem; background:none; border:none; color:var(--ivory); font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; cursor:pointer; }
+  @media (max-width:860px){
+    .nav-links{ display:none; }
+    .menu-toggle{ display:flex; }
+  }
+
+  /* hero */
+  .hero{ position:relative; height:100vh; min-height:640px; background:var(--black); display:flex; align-items:center; justify-content:center; overflow:hidden; text-align:center; }
+  .beam{ position:absolute; top:-25%; left:-30%; width:160%; height:160%; background:linear-gradient(115deg, transparent 40%, rgba(176,141,87,.4) 49%, rgba(244,240,232,.22) 51%, transparent 62%); filter:blur(55px); animation:drift 20s ease-in-out infinite alternate; pointer-events:none; }
+  @keyframes drift{ 0%{ transform:translate(-4%,-2%) rotate(0deg); } 100%{ transform:translate(4%,3%) rotate(2deg); } }
+  .hero-content{ position:relative; z-index:2; color:var(--ivory); padding:0 24px; }
+  .hero-cord{ position:relative; display:inline-block; margin-bottom:1.25rem; opacity:0; cursor:grab; touch-action:none; animation:cordIn 1.3s ease forwards; }
+  .hero-cord:active{ cursor:grabbing; }
+  .hero-cord:focus-visible{ outline:2px solid var(--gold); outline-offset:6px; }
+  .cord-string{ fill:none; stroke:var(--ivory); stroke-width:2; stroke-linecap:round; opacity:.85; }
+  .cord-string-2{ opacity:.65; }
+  .cord-tip{ fill:var(--gold); }
+  .cord-light{ position:absolute; top:-10%; left:50%; transform:translateX(-50%); width:60px; height:60px; background:radial-gradient(circle, rgba(244,240,232,.55), transparent 70%); filter:blur(10px); opacity:0; animation:cordSweep 1.6s ease-in-out .25s 1 both; pointer-events:none; }
+  @keyframes cordIn{ from{ opacity:0; transform:translateY(-10px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes cordSweep{ 0%{ top:-10%; opacity:0; } 35%{ opacity:.9; } 100%{ top:95%; opacity:0; } }
+  .hero-word{ font-family:var(--sans); font-weight:700; font-size:clamp(3.2rem,12vw,7.5rem); letter-spacing:.12em; line-height:1; opacity:0; animation:fadeUp .9s ease forwards; animation-delay:1s; }
+  .hero-tagline{ font-family:var(--serif); font-style:italic; font-size:clamp(1.15rem,2.6vw,1.6rem); color:var(--ivory); opacity:0; margin:1.6rem 0 2.5rem; animation:fadeUp .9s ease forwards; animation-delay:1.7s; }
+  .hero-cta{ opacity:0; animation:fadeUp .9s ease forwards; animation-delay:2.3s; }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+  .scroll-cue{ position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); z-index:2; }
+  .scroll-cue span{ display:block; width:1px; height:36px; background:linear-gradient(var(--gold), transparent); animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:.3; } 50%{ opacity:1; } }
+  @media (prefers-reduced-motion:reduce){
+    .beam{ animation:none; }
+    .scroll-cue span{ animation:none; opacity:.6; }
+    .hero-cord, .hero-word, .hero-tagline, .hero-cta{ animation:none; opacity:1; }
+    .cord-light{ display:none; }
+  }
+
+  /* page head */
+  .page-head{ max-width:1280px; margin:0 auto; padding:6rem 1.5rem 2.5rem; }
+  .page-head h2{ font-family:var(--serif); font-weight:400; font-size:clamp(2rem,4vw,3rem); margin-top:.6rem; }
+  .page-head-sub{ font-family:var(--sans); color:var(--stone); max-width:560px; margin-top:.9rem; font-size:.95rem; line-height:1.7; }
+
+  /* day grid (home) */
+  .day-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:1.1rem; max-width:900px; margin:0 auto; padding:0 1.5rem 5rem; }
+  .day-card{ display:flex; flex-direction:column; align-items:center; background:none; border:1px solid rgba(43,43,43,.12); border-radius:2px; padding:1.5rem 1rem; text-align:center; cursor:pointer; transition:.25s ease; }
+  .day-card:hover{ border-color:var(--gold); transform:translateY(-3px); }
+  .day-swatch{ width:42px; height:42px; border-radius:50%; margin-bottom:.9rem; border:1px solid rgba(43,43,43,.15); }
+  .day-name{ font-family:var(--sans); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; }
+  .day-mood{ font-family:var(--serif); font-style:italic; color:var(--gold-deep); font-size:.8rem; margin-top:.45rem; }
+
+  /* statement strip */
+  .statement{ background:var(--charcoal); color:var(--ivory); text-align:center; padding:5.5rem 1.5rem; }
+  .statement .quote{ font-family:var(--serif); font-style:italic; font-size:clamp(1.8rem,4.5vw,3rem); }
+  .statement .sub{ display:block; margin-top:1rem; color:var(--gold); letter-spacing:.15em; text-transform:uppercase; font-size:.7rem; }
+
+  /* product / shop page */
+  .product-detail{ max-width:1100px; margin:0 auto; padding:6.5rem 1.5rem 5rem; display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:start; }
+  .product-gallery{ display:flex; flex-direction:column; gap:.75rem; }
+  .gallery-main{ position:relative; aspect-ratio:4/5; border:1px solid rgba(43,43,43,.1); background:var(--vcolor, var(--charcoal)); overflow:hidden; touch-action:pan-y; transition:background .3s ease; }
+  .gallery-main img{ width:100%; height:100%; object-fit:contain; object-position:center; display:block; opacity:0; transition:opacity .4s ease; }
+  .gallery-main img.loaded{ opacity:1; }
+  .gallery-nav{ position:absolute; top:50%; transform:translateY(-50%); width:34px; height:34px; border-radius:50%; border:1px solid rgba(244,240,232,.4); background:rgba(13,13,13,.25); color:var(--ivory); font-size:1.1rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:.7; transition:.2s; }
+  .gallery-nav:hover, .gallery-nav:focus-visible{ opacity:1; background:rgba(13,13,13,.45); }
+  .gallery-nav.prev{ left:.75rem; }
+  .gallery-nav.next{ right:.75rem; }
+  .gallery-dots{ display:none; justify-content:center; gap:.5rem; margin-top:.6rem; }
+  .gallery-dots span{ width:6px; height:6px; border-radius:50%; background:rgba(43,43,43,.25); transition:.2s; }
+  .gallery-dots span.active{ background:var(--gold); }
+  .gallery-thumbs{ display:grid; grid-template-columns:repeat(4,1fr); gap:.6rem; }
+  .gallery-thumb{ aspect-ratio:4/5; border:1px solid rgba(43,43,43,.15); background:var(--charcoal); padding:0; cursor:pointer; overflow:hidden; opacity:.55; transition:opacity .2s, border-color .2s; }
+  .gallery-thumb.active{ opacity:1; border-color:var(--gold); }
+  .gallery-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  @media (max-width:760px){
+    .gallery-thumbs{ display:none; }
+    .gallery-dots{ display:flex; }
+  }
+  .product-info h2{ font-family:var(--serif); font-weight:400; font-size:2.1rem; margin:.35rem 0 .5rem; }
+  .product-price{ font-size:1.05rem; color:var(--stone); margin-bottom:1.25rem; }
+  .badge-soon{ display:inline-block; font-family:var(--sans); font-size:.65rem; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:var(--gold-deep); border:1px solid var(--gold-deep); border-radius:20px; padding:.3em .8em; margin-left:.6rem; vertical-align:middle; }
+  .waitlist-email-form{ display:flex; flex-direction:column; gap:.75rem; }
+  .waitlist-email-form input{ font:inherit; font-size:.85rem; padding:.8em 1em; border:1px solid rgba(43,43,43,.25); background:transparent; border-radius:2px; }
+  .waitlist-email-form input:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+  .waitlist-note{ font-size:.72rem; color:var(--stone); }
+  .waitlist-confirmed{ font-family:var(--serif); font-style:italic; color:var(--gold-deep); font-size:.9rem; line-height:1.6; }
+  .product-philosophy{ font-family:var(--serif); font-style:italic; font-size:1.25rem; color:var(--black); margin-bottom:2rem; line-height:1.5; }
+  .select-label{ display:block; font-family:var(--sans); font-weight:600; font-size:.72rem; text-transform:uppercase; letter-spacing:.12em; color:var(--charcoal); margin-bottom:.75rem; }
+  .variant-select{ margin-bottom:1.75rem; }
+  .day-pills{ display:flex; flex-wrap:wrap; gap:.6rem; }
+  .day-pill{ display:flex; flex-direction:column; align-items:flex-start; gap:.3rem; padding:.65em 1em; border:1px solid rgba(43,43,43,.25); border-radius:10px; background:transparent; cursor:pointer; font-family:var(--sans); text-align:left; }
+  .pill-top{ display:flex; align-items:center; gap:.5rem; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; }
+  .pill-mood{ font-family:var(--serif); font-style:italic; font-size:.72rem; opacity:.85; }
+  .day-pill .dot{ width:11px; height:11px; border-radius:50%; display:inline-block; border:1px solid rgba(0,0,0,.15); flex-shrink:0; }
+  .day-pill.selected{ border-color:var(--black); background:var(--black); color:var(--ivory); }
+  .mantra{ font-family:var(--serif); font-style:italic; color:var(--stone); margin-top:.9rem; min-height:1.4em; font-size:.95rem; }
+  .size-select-wrap{ margin-bottom:.5rem; }
+  .size-select{ display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:.85rem; }
+  .size-pill{ min-width:46px; padding:.6em .9em; border:1px solid rgba(43,43,43,.25); background:transparent; font-family:var(--sans); font-size:.8rem; cursor:pointer; border-radius:2px; }
+  .size-pill.selected{ border-color:var(--black); background:var(--black); color:var(--ivory); }
+  .fit-toggle{ background:none; border:none; color:var(--gold-deep); font-size:.75rem; text-decoration:underline; cursor:pointer; padding:0; margin-bottom:1rem; }
+  .fit-table{ margin-bottom:1.25rem; }
+  .fit-table-inner{ width:100%; font-size:.82rem; }
+  .fit-table-inner th, .fit-table-inner td{ text-align:left; padding:.5rem .75rem .5rem 0; border-bottom:1px solid rgba(43,43,43,.1); }
+  .fit-table-inner th{ color:var(--stone); text-transform:uppercase; letter-spacing:.06em; font-size:.68rem; font-weight:600; }
+  .size-warning{ display:none; font-style:italic; font-size:.8rem; color:var(--charcoal); margin-bottom:1.25rem; }
+  .product-note{ margin-top:1.25rem; font-size:.8rem; color:var(--stone); line-height:1.6; }
+  .features-heading{ font-family:var(--sans); font-weight:600; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--stone); margin:2.25rem 0 .25rem; }
+  .product-features{ border-top:1px solid rgba(43,43,43,.1); }
+  .product-features li{ padding:.6rem 0; border-bottom:1px solid rgba(43,43,43,.08); font-size:.88rem; }
+  @media (max-width:760px){ .product-detail{ grid-template-columns:1fr; } }
+
+  /* lookbook */
+  .lookbook-grid{ max-width:900px; margin:0 auto; padding:0 1.5rem 6rem; display:grid; gap:1.25rem; }
+  .lookbook-card{ display:flex; gap:1.5rem; align-items:center; padding:1.75rem; border:1px solid rgba(43,43,43,.1); background:none; cursor:pointer; text-align:left; width:100%; transition:.2s ease; }
+  .lookbook-card:hover{ border-color:var(--gold); }
+  .lookbook-swatch{ width:60px; height:60px; border-radius:50%; flex-shrink:0; border:1px solid rgba(43,43,43,.15); }
+  .lookbook-card .mood{ color:var(--gold-deep); text-transform:uppercase; font-size:.68rem; letter-spacing:.12em; margin-bottom:.35rem; }
+  .lookbook-card h3{ font-family:var(--sans); font-weight:600; text-transform:uppercase; letter-spacing:.06em; font-size:.95rem; margin-bottom:.5rem; }
+  .lookbook-identity{ font-family:var(--serif); font-style:italic; font-size:1.15rem; color:var(--black); margin-bottom:.5rem; }
+  .lookbook-mantra{ font-family:var(--sans); font-size:.82rem; color:var(--stone); }
+
+  /* editorial (about) */
+  .editorial{ max-width:680px; margin:0 auto; padding:6.5rem 1.5rem 6rem; text-align:center; }
+  .editorial h2{ font-family:var(--serif); font-weight:400; font-size:clamp(2rem,4.5vw,3.2rem); margin:.75rem 0 2rem; }
+  .philosophy-lines{ margin:2.5rem 0 3.5rem; }
+  .philosophy-lines p{ font-family:var(--serif); font-style:italic; font-size:clamp(1.25rem,3vw,1.8rem); line-height:1.5; color:var(--charcoal); margin-bottom:.25rem; opacity:0; animation:fadeUp .8s ease forwards; }
+  .philosophy-lines .ph-break{ margin-top:1.1rem; color:var(--stone); }
+  .philosophy-lines .ph-strong{ font-style:normal; font-weight:600; font-family:var(--sans); text-transform:uppercase; letter-spacing:.06em; font-size:1rem; color:var(--charcoal); margin-top:1.1rem; }
+  .philosophy-lines .ph-brand{ font-style:normal; font-family:var(--sans); font-weight:700; letter-spacing:.3em; font-size:1.2rem; color:var(--gold); margin-top:1.4rem; }
+  @media (prefers-reduced-motion:reduce){ .philosophy-lines p{ animation:none; opacity:1; } }
+  .pullquote{ margin:3.5rem 0; }
+  .pullquote .quote{ font-family:var(--serif); font-style:italic; font-size:clamp(1.8rem,4vw,2.6rem); color:var(--black); }
+  .pullquote .sub{ display:block; margin-top:.75rem; color:var(--stone); letter-spacing:.08em; text-transform:uppercase; font-size:.72rem; }
+  .steps{ display:grid; gap:2rem; text-align:left; margin:2.5rem 0 1rem; }
+  .step{ display:flex; gap:1.25rem; align-items:flex-start; }
+  .step .num{ font-family:var(--serif); font-style:italic; color:var(--gold-deep); font-size:1.5rem; line-height:1; }
+  .step h4{ font-family:var(--sans); font-weight:600; letter-spacing:.05em; text-transform:uppercase; font-size:.8rem; margin-bottom:.35rem; }
+  .step p{ font-size:.92rem; color:var(--stone); margin:0; }
+
+  /* join list */
+  .join-list{ background:var(--ivory); border-top:1px solid rgba(43,43,43,.1); padding:3.5rem 1.5rem; }
+  .join-inner{ max-width:900px; margin:0 auto; display:flex; flex-wrap:wrap; gap:1.5rem; align-items:center; justify-content:space-between; }
+  .join-inner p{ font-size:.9rem; color:var(--stone); margin-top:.4rem; max-width:340px; }
+  .join-form{ display:flex; gap:.75rem; flex-wrap:wrap; }
+  .join-form input{ font:inherit; font-size:.85rem; padding:.8em 1em; border:1px solid rgba(43,43,43,.25); background:transparent; min-width:220px; border-radius:2px; }
+  .join-form input:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
+  .join-thanks{ font-family:var(--serif); font-style:italic; color:var(--gold-deep); }
+
+  /* cart drawer */
+  .cart-overlay{ position:fixed; inset:0; background:rgba(13,13,13,.5); opacity:0; pointer-events:none; transition:.3s; z-index:1200; }
+  .cart-overlay.open{ opacity:1; pointer-events:auto; }
+  .cart-drawer{ position:fixed; top:0; right:0; height:100%; width:min(400px,88vw); background:var(--ivory); z-index:1300; transform:translateX(100%); transition:.35s ease; display:flex; flex-direction:column; box-shadow:-8px 0 30px rgba(0,0,0,.15); }
+  .cart-drawer.open{ transform:translateX(0); }
+  .cart-head{ display:flex; justify-content:space-between; align-items:center; padding:1.5rem; border-bottom:1px solid rgba(43,43,43,.1); font-family:var(--sans); text-transform:uppercase; letter-spacing:.1em; font-size:.85rem; }
+  .cart-head button{ background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--charcoal); line-height:1; }
+  .cart-items{ flex:1; overflow-y:auto; padding:1.5rem; }
+  .cart-empty{ color:var(--stone); font-size:.9rem; text-align:center; margin-top:2rem; }
+  .cart-item{ display:flex; gap:1rem; margin-bottom:1.25rem; padding-bottom:1.25rem; border-bottom:1px solid rgba(43,43,43,.08); align-items:flex-start; }
+  .cart-swatch{ width:44px; height:44px; border-radius:50%; flex-shrink:0; border:1px solid rgba(43,43,43,.15); }
+  .cart-item-info{ flex:1; }
+  .cart-item-info h4{ font-size:.85rem; font-weight:600; margin-bottom:.2rem; }
+  .cart-item-info .meta{ font-size:.75rem; color:var(--stone); }
+  .cart-item-info .remove{ background:none; border:none; color:var(--stone); font-size:.7rem; text-decoration:underline; cursor:pointer; margin-top:.4rem; padding:0; }
+  .cart-footer{ padding:1.5rem; border-top:1px solid rgba(43,43,43,.1); }
+  .cart-subtotal{ display:flex; justify-content:space-between; margin-bottom:1rem; font-size:.9rem; font-weight:600; }
+  .cart-checkout{ width:100%; text-align:center; }
+  .cart-checkout:disabled{ opacity:.5; cursor:not-allowed; }
+
+  /* footer */
+  footer{ background:var(--black); color:var(--ivory); text-align:center; padding:3rem 1.5rem 2.5rem; border-top:1px solid rgba(244,240,232,.08); }
+  footer .foot-links{ display:flex; justify-content:center; gap:1.5rem; margin-bottom:1rem; }
+  footer .foot-links a{ text-decoration:none; font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; opacity:.85; }
+  footer .foot-links a:hover{ opacity:1; color:var(--gold); }
+  .foot-social{ display:flex; justify-content:center; gap:1.25rem; margin-bottom:1.5rem; }
+  .foot-social a{ color:var(--ivory); opacity:.8; }
+  .foot-social a:hover{ opacity:1; color:var(--gold); }
+  footer .copyright{ font-size:.7rem; color:var(--stone); letter-spacing:.03em; }
+  footer .foot-tagline{ font-family:var(--serif); font-style:italic; color:var(--gold); font-size:.8rem; margin-top:.6rem; }
+
+  /* grain */
+  .grain-overlay{ position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.045; mix-blend-mode:overlay; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); }
+
+  /* page switching */
+  .page{ display:none; min-height:60vh; }
+  .page.active{ display:block; animation:fadeIn .35s ease; }
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:translateY(0); } }
+  @media (prefers-reduced-motion:reduce){ .page.active{ animation:none; } }
+</style>
+</head>
+<body>
+
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<header id="site-header">
+  <div class="nav-inner">
+    <a href="#home" class="logo" data-page="home">BEAM</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#shop" data-page="shop" data-i18n="shop">Shop</a>
+      <a href="#lookbook" data-page="lookbook">Lookbook</a>
+      <a href="#about" data-page="about" data-i18n="about">About</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch" id="langSwitch">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="yo">YO</button>
+        <button class="lang-btn" data-lang="ha">HA</button>
+        <button class="lang-btn" data-lang="ig">IG</button>
+      </div>
+      <button class="sound-btn" id="soundBtn" aria-pressed="false" aria-label="Toggle ambient sound">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M4 9v6h4l5 4V5L8 9H4z"/>
+          <path d="M16.2 8.8a5 5 0 0 1 0 6.4"/>
+          <line id="soundSlash" x1="3" y1="3" x2="21" y2="21"/>
+        </svg>
+      </button>
+      <button class="bag-btn" id="bagBtn" aria-label="Open bag">Bag · 0</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">Close</button>
+  <a href="#shop" data-page="shop" data-i18n="shop">Shop</a>
+  <a href="#lookbook" data-page="lookbook">Lookbook</a>
+  <a href="#about" data-page="about" data-i18n="about">About</a>
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="yo">YO</button>
+    <button class="lang-btn" data-lang="ha">HA</button>
+    <button class="lang-btn" data-lang="ig">IG</button>
+  </div>
+</div>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Waitlist">
+  <div class="cart-head">
+    <span>Your Waitlist</span>
+    <button id="cartClose" aria-label="Close waitlist">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter"></div>
+</aside>
+
+<main>
+
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <div class="beam" aria-hidden="true"></div>
+      <div class="hero-content">
+        <div class="hero-cord" id="heroCord" tabindex="0" role="slider" aria-label="Drawcord — hold and drag to adjust ambience" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="cord-light" aria-hidden="true"></div>
+          <svg viewBox="0 0 120 150" width="64" height="80" aria-hidden="true">
+            <path class="cord-string" d="M45 0 C42 55, 30 85, 40 135" />
+            <path class="cord-string cord-string-2" d="M75 0 C78 55, 90 85, 80 135" />
+            <circle class="cord-tip" cx="40" cy="135" r="3"/>
+            <circle class="cord-tip" cx="80" cy="135" r="3"/>
+          </svg>
+        </div>
+        <h1 class="hero-word">BEAM</h1>
+        <p class="hero-tagline" data-i18n="heroTagline">Whatever the day may be… BEAM.</p>
+        <a href="#shop" data-page="shop" class="btn btn-ghost hero-cta" data-i18n="shopCta">Preview The Jort</a>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span></span></div>
+    </div>
+
+    <div class="page-head">
+      <span class="eyebrow">Drop 001</span>
+      <h2>Four Days. One Choice.</h2>
+      <p class="page-head-sub">The garment color represents the day. The drawcord represents the choice.</p>
+    </div>
+    <div class="day-grid" id="dayGrid"></div>
+
+    <div class="statement">
+      <p class="quote">"We walk forward."</p>
+      <span class="sub">Not louder. Just steadier.</span>
+    </div>
+  </section>
+
+  <section class="page" id="page-shop">
+    <div class="product-detail">
+      <div class="product-gallery" id="productGallery">
+        <div class="gallery-main" id="galleryMain">
+          <img id="galleryMainImg" src="" alt="" loading="lazy">
+          <button type="button" class="gallery-nav prev" id="galleryPrev" aria-label="Previous image">‹</button>
+          <button type="button" class="gallery-nav next" id="galleryNext" aria-label="Next image">›</button>
+        </div>
+        <div class="gallery-dots" id="galleryDots" aria-hidden="true"></div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+      </div>
+      <div class="product-info">
+        <span class="eyebrow">Drop 001</span>
+        <h2>The Jort</h2>
+        <p class="product-price">₦35,000 <span class="badge-soon" data-i18n="comingSoon">Coming Soon</span></p>
+        <p class="product-philosophy">The day changes. The choice doesn't.</p>
+
+        <div class="variant-select">
+          <span class="select-label" data-i18n="chooseDay">Choose your day</span>
+          <div class="day-pills" id="dayPills"></div>
+          <p class="mantra" id="mantraLine"></p>
+        </div>
+
+        <div class="size-select-wrap">
+          <span class="select-label" data-i18n="size">Size</span>
+          <div class="size-select" id="productSizes"></div>
+          <button type="button" class="fit-toggle" id="fitToggle" data-i18n="fitGuide">View fit guide</button>
+          <div class="fit-table" id="fitTable" hidden>
+            <table class="fit-table-inner">
+              <thead><tr><th>Size</th><th>Waist (in)</th><th>Length (in)</th></tr></thead>
+              <tbody>
+                <tr><td>S</td><td>28–30</td><td>20</td></tr>
+                <tr><td>M</td><td>31–33</td><td>20.5</td></tr>
+                <tr><td>L</td><td>34–36</td><td>21</td></tr>
+                <tr><td>XL</td><td>37–39</td><td>21.5</td></tr>
+                <tr><td>XXL</td><td>40–42</td><td>22</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p class="size-warning" id="sizeWarning">Select a day and a size first.</p>
+        <button class="btn btn-dark" id="addToBagBtn" data-i18n="joinWaitlist">Join Waitlist</button>
+        <p class="product-note">Still becoming what it's meant to be. Join the waitlist — you'll be the first to know.</p>
+
+        <h3 class="features-heading">The Details</h3>
+        <ul class="product-features">
+          <li>500GSM heavyweight French terry</li>
+          <li>100% premium cotton, pre-shrunk</li>
+          <li>Oversized fit</li>
+          <li>Signature long cream drawcord — every color, always</li>
+          <li>Deep pockets</li>
+          <li>Made to order</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" id="page-lookbook">
+    <div class="page-head">
+      <span class="eyebrow">Lookbook</span>
+      <h2>Four Days, One Collection.</h2>
+      <p class="page-head-sub">BEAM doesn't photograph clothes. It photographs moments — tying a drawstring before sunrise, sitting on concrete steps after a long day.</p>
+    </div>
+    <div class="lookbook-grid" id="lookbookGrid"></div>
+  </section>
+
+  <section class="page" id="page-about">
+    <div class="editorial">
+      <span class="eyebrow" data-i18n="aboutEyebrow">The Philosophy</span>
+      <h2 data-i18n="aboutHeadline">Whatever the day may be.</h2>
+
+      <div class="philosophy-lines" id="philosophyLines">
+        <p data-i18n="ph1" style="animation-delay:.1s">Some days are heavy.</p>
+        <p data-i18n="ph2" style="animation-delay:.3s">Some days are quiet.</p>
+        <p data-i18n="ph3" style="animation-delay:.5s">Some days are loud.</p>
+        <p data-i18n="ph4" style="animation-delay:.7s">Some days feel impossible.</p>
+        <p class="ph-break" data-i18n="ph5" style="animation-delay:.9s">The day changes.</p>
+        <p class="ph-break" data-i18n="ph6" style="animation-delay:1.05s">You don't have to.</p>
+        <p class="ph-strong" data-i18n="ph7" style="animation-delay:1.25s">Tie the cord.</p>
+        <p class="ph-strong" data-i18n="ph8" style="animation-delay:1.4s">Walk forward.</p>
+        <p class="ph-brand" style="animation-delay:1.6s">BEAM.</p>
+      </div>
+
+      <div class="pullquote">
+        <p class="quote">We walk forward.</p>
+        <span class="sub">Our Philosophy</span>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span class="num">01</span>
+          <div><h4>The Garment</h4><p>Represents the day you're living.</p></div>
+        </div>
+        <div class="step">
+          <span class="num">02</span>
+          <div><h4>The Color</h4><p>Represents the emotion of that day.</p></div>
+        </div>
+        <div class="step">
+          <span class="num">03</span>
+          <div><h4>The Drawcord</h4><p>Represents your choice. You tie it. You move forward.</p></div>
+        </div>
+      </div>
+
+      <div class="pullquote">
+        <p class="quote">BEAM is for me and you.</p>
+        <span class="sub">Whoever needs the reminder</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<section class="join-list">
+  <div class="join-inner">
+    <div>
+      <span class="eyebrow" data-i18n="joinHeadline">Drop 001 Is Just The Start</span>
+      <p data-i18n="joinSub">The Jort is Drop 001. Join the list for whatever BEAM becomes next.</p>
+    </div>
+    <form class="join-form" id="joinForm">
+      <input type="email" placeholder="Enter your email" aria-label="Email address" required>
+      <button type="submit" class="btn btn-dark" data-i18n="subscribe">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-links">
+    <a href="#home" data-page="home">Beam</a>
+    <a href="mailto:hello@wearbeam.com">Contact</a>
+  </div>
+  <div class="foot-social">
+    <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+    <a href="#" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 4v9.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 4c0 3 2.2 5 5 5"/></svg></a>
+    <a href="mailto:hello@wearbeam.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+  </div>
+  <p class="copyright">© 2026 Beam. All rights reserved.</p>
+  <p class="foot-tagline" data-i18n="footerTag">Whatever the day may be… BEAM.</p>
+</footer>
+
+<script>
+  const JORT_VARIANTS = [
+    { day:'Monday', mood:'The Beginning.', label:'Charcoal Grey', mantra:'Heavy starts build strong finishes.', hex:'#4A4944' },
+    { day:'Wednesday', mood:'The Climb.', label:'Dusty Rose', mantra:'Feel it. Release it. Keep going.', hex:'#B98177' },
+    { day:'Saturday', mood:'The Pause.', label:'Black', mantra:'Rest today. Strength for tomorrow.', hex:'#161616' },
+    { day:'Sunday', mood:'The Light.', label:'Bone', mantra:'Reset. Reflect. Begin again.', hex:'#E4DAC8' }
+  ];
+  const SIZES = ['S','M','L','XL','XXL'];
+  const PRICE = 35000;
+
+  const PRODUCT_IMAGES = {
+    monday:    ['images/monday-front.jpg','images/monday-back.jpg','images/monday-detail.jpg','images/monday-model.jpg'],
+    wednesday: ['images/wednesday-front.jpg','images/wednesday-back.jpg','images/wednesday-detail.jpg','images/wednesday-model.jpg'],
+    saturday:  ['images/saturday-front.jpg','images/saturday-back.jpg','images/saturday-detail.jpg','images/saturday-model.jpg'],
+    sunday:    ['images/sunday-front.jpg','images/sunday-back.jpg','images/sunday-detail.jpg','images/sunday-model.jpg']
+  };
+  const SHOT_LABELS = ['Front','Back','Detail','Model'];
+  let currentImageIndex = 0;
+
+  const I18N = {
+    en:{ shop:'Shop', about:'About', bag:'Waitlist', addToBag:'Add to Bag', joinWaitlist:'Join Waitlist', comingSoon:'Coming Soon', chooseDay:'Choose your day', size:'Size',
+      heroTagline:'Whatever the day may be… BEAM.', shopCta:'Preview The Jort',
+      aboutEyebrow:'The Philosophy', aboutHeadline:'Whatever the day may be.',
+      ph1:'Some days are heavy.', ph2:'Some days are quiet.', ph3:'Some days are loud.', ph4:'Some days feel impossible.',
+      ph5:'The day changes.', ph6:"You don't have to.", ph7:'Tie the cord.', ph8:'Walk forward.',
+      footerTag:'Whatever the day may be… BEAM.', fitGuide:'View fit guide', hideFit:'Hide fit guide',
+      subscribe:'Subscribe', joinHeadline:'Drop 001 Is Just The Start', joinSub:'The Jort is Drop 001. Join the list for whatever BEAM becomes next.' },
+    yo:{ shop:'Ṣọ́ọ̀bù', about:'Nípa Wa', bag:'Àkọsílẹ̀', addToBag:'Fi kún Àpò', joinWaitlist:'Dara pọ̀ mọ́ Àkọsílẹ̀', comingSoon:'Ń Bọ̀', chooseDay:'Yan ọjọ́ rẹ', size:'Ìwọ̀n',
+      heroTagline:'Ohunkóhun tí ọjọ́ bá jẹ́… BEAM.', shopCta:'Wo The Jort',
+      aboutEyebrow:'Ìmọ̀ Ọgbọ́n', aboutHeadline:'Ohunkóhun tí ọjọ́ bá jẹ́.',
+      ph1:'Ọjọ́ mìíràn máa ń wúwo.', ph2:'Ọjọ́ mìíràn máa ń dákẹ́.', ph3:'Ọjọ́ mìíràn máa ń pariwo.', ph4:'Ọjọ́ mìíràn dà bí eyí tí kò ṣeéṣe.',
+      ph5:'Ọjọ́ a máa yí padà.', ph6:'Ìwọ kò ní láti yí padà.', ph7:'So okùn náà.', ph8:'Tẹ̀síwájú.',
+      footerTag:'Ohunkóhun tí ọjọ́ bá jẹ́… BEAM.', fitGuide:'Wo ìwọ̀n aṣọ', hideFit:'Fi ìwọ̀n aṣọ pamọ́',
+      subscribe:'Forúkọsílẹ̀', joinHeadline:'Drop 001 Ni Ìbẹ̀rẹ̀ Nìkan', joinSub:'The Jort ni Drop 001. Dara pọ̀ fún ohunkóhun tí BEAM máa jẹ́ nígbà tó ń bọ̀.' },
+    ha:{ shop:'Shago', about:'Game da Mu', bag:'Jerin Sauraro', addToBag:'Ƙara cikin Jaka', joinWaitlist:'Shiga Jerin Sauraro', comingSoon:'Nan Gaba', chooseDay:'Zaɓi ranarka', size:'Girma',
+      heroTagline:'Kome yanayin ranar… BEAM.', shopCta:'Duba The Jort',
+      aboutEyebrow:'Falsafa', aboutHeadline:'Kome yanayin ranar.',
+      ph1:'Wasu kwanaki suna da nauyi.', ph2:'Wasu kwanaki suna da natsuwa.', ph3:'Wasu kwanaki suna da hayaniya.', ph4:'Wasu kwanaki suna jin kamar ba za a iya ba.',
+      ph5:'Rana tana canjawa.', ph6:'Ba dole ne ka canja ba.', ph7:'Ɗaure igiyar.', ph8:'Ci gaba da tafiya.',
+      footerTag:'Kome yanayin ranar… BEAM.', fitGuide:'Duba girman sutura', hideFit:'Ɓoye girman sutura',
+      subscribe:'Yi Rijista', joinHeadline:'Drop 001 Farawa Ce Kawai', joinSub:'The Jort shine Drop 001. Shiga jerin don duk abin da BEAM zai zama nan gaba.' },
+    ig:{ shop:'Ahịa', about:'Maka Anyị', bag:'Ndepụta', addToBag:"Tinye n'Akpa", joinWaitlist:"Sonye na Ndepụta", comingSoon:"Na-abịa", chooseDay:'Họrọ ụbọchị gị', size:'Nha',
+      heroTagline:'Ihe ọ bụla ụbọchị nwere… BEAM.', shopCta:'Lee The Jort',
+      aboutEyebrow:'Nkà Ihe Ọmụmụ', aboutHeadline:'Ihe ọ bụla ụbọchị nwere.',
+      ph1:'Ụbọchị ụfọdụ na-adị arọ.', ph2:'Ụbọchị ụfọdụ na-adị jụụ.', ph3:'Ụbọchị ụfọdụ na-ada ụda.', ph4:'Ụbọchị ụfọdụ na-adị ka ihe na-agaghị ekwe ome.',
+      ph5:'Ụbọchị na-agbanwe.', ph6:'Ị naghị agbanwe.', ph7:'Kee eriri ahụ.', ph8:"Gaa n'ihu.",
+      footerTag:'Ihe ọ bụla ụbọchị nwere… BEAM.', fitGuide:'Lee usoro nha', hideFit:'Zoo usoro nha',
+      subscribe:'Debanye aha', joinHeadline:'Drop 001 Bụ Naanị Mmalite', joinSub:'The Jort bụ Drop 001. Sonye na ndepụta maka ihe ọ bụla BEAM ga-aghọ n\'ọdịnihu.' }
+  };
+  const BEAM_INBOX = 'brianjames363@gmail.com';
+  function sendToBeamInbox(payload){
+    fetch('https://formsubmit.co/ajax/' + BEAM_INBOX, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(err => console.warn('BEAM: signup email failed to send —', err));
+  }
+
+  let currentLang = 'en';
+  let cart = [];
+  let waitlistEmail = null;
+  let selectedDay = null;
+  let selectedSize = null;
+
+  function variantByDay(day){ return JORT_VARIANTS.find(v=>v.day===day); }
+
+  function renderDayGrid(){
+    const grid = document.getElementById('dayGrid');
+    grid.innerHTML = JORT_VARIANTS.map(v => `
+      <button type="button" class="day-card" data-day="${v.day}" title="${v.label}">
+        <span class="day-swatch" style="background:${v.hex}"></span>
+        <span class="day-name">${v.day}</span>
+        <span class="day-mood">${v.mood}</span>
+      </button>`).join('');
+    grid.querySelectorAll('.day-card').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        selectDay(btn.dataset.day);
+        showPage('shop');
+      });
+    });
+  }
+
+  function renderDayPills(){
+    const wrap = document.getElementById('dayPills');
+    wrap.innerHTML = JORT_VARIANTS.map(v => `
+      <button type="button" class="day-pill" data-day="${v.day}" title="${v.label}">
+        <span class="pill-top"><span class="dot" style="background:${v.hex}"></span>${v.day}</span>
+        <span class="pill-mood">${v.mood}</span>
+      </button>`).join('');
+    wrap.querySelectorAll('.day-pill').forEach(btn=>{
+      btn.addEventListener('click', ()=> selectDay(btn.dataset.day));
+    });
+  }
+
+  function selectDay(day){
+    selectedDay = day;
+    const v = variantByDay(day);
+    document.querySelectorAll('.day-pill').forEach(b=>{
+      b.classList.toggle('selected', b.dataset.day === day);
+    });
+    document.getElementById('galleryMain').style.setProperty('--vcolor', v.hex);
+    document.getElementById('mantraLine').textContent = '"' + v.mantra + '"';
+    document.getElementById('sizeWarning').style.display = 'none';
+    renderGalleryThumbs(day);
+    setGalleryImage(0);
+    applyMoodAudio(day);
+  }
+
+  function renderGalleryThumbs(day){
+    const imgs = PRODUCT_IMAGES[day.toLowerCase()] || [];
+    const wrap = document.getElementById('galleryThumbs');
+    wrap.innerHTML = imgs.map((src, i) => `
+      <button type="button" class="gallery-thumb" data-index="${i}" aria-label="${SHOT_LABELS[i]} view">
+        <img src="${src}" alt="" loading="lazy" onerror="this.closest('.gallery-thumb').style.opacity='.15'">
+      </button>`).join('');
+    wrap.querySelectorAll('.gallery-thumb').forEach(btn=>{
+      btn.addEventListener('click', ()=> setGalleryImage(parseInt(btn.dataset.index, 10)));
+    });
+    const dots = document.getElementById('galleryDots');
+    dots.innerHTML = imgs.map((_, i) => `<span data-index="${i}"></span>`).join('');
+  }
+
+  function setGalleryImage(index){
+    const day = (selectedDay || JORT_VARIANTS[0].day).toLowerCase();
+    const imgs = PRODUCT_IMAGES[day] || [];
+    if(imgs.length === 0) return;
+    currentImageIndex = ((index % imgs.length) + imgs.length) % imgs.length;
+    const mainImg = document.getElementById('galleryMainImg');
+    mainImg.classList.remove('loaded');
+    window.setTimeout(()=>{
+      mainImg.src = imgs[currentImageIndex];
+      mainImg.alt = 'BEAM — The Jort — ' + selectedDay + ' — ' + SHOT_LABELS[currentImageIndex] + ' view';
+    }, 260);
+    document.querySelectorAll('.gallery-thumb').forEach(t=>{
+      t.classList.toggle('active', parseInt(t.dataset.index, 10) === currentImageIndex);
+    });
+    document.querySelectorAll('#galleryDots span').forEach(d=>{
+      d.classList.toggle('active', parseInt(d.dataset.index, 10) === currentImageIndex);
+    });
+  }
+
+  function renderSizes(){
+    const wrap = document.getElementById('productSizes');
+    wrap.innerHTML = SIZES.map(s=>`<button type="button" class="size-pill" data-size="${s}">${s}</button>`).join('');
+    wrap.querySelectorAll('.size-pill').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        wrap.querySelectorAll('.size-pill').forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedSize = btn.dataset.size;
+        document.getElementById('sizeWarning').style.display = 'none';
+      });
+    });
+  }
+
+  function renderLookbook(){
+    const grid = document.getElementById('lookbookGrid');
+    grid.innerHTML = JORT_VARIANTS.map(v => `
+      <button type="button" class="lookbook-card" data-day="${v.day}">
+        <span class="lookbook-swatch" style="background:${v.hex}"></span>
+        <div>
+          <div class="mood">${v.label}</div>
+          <h3>${v.day}</h3>
+          <p class="lookbook-identity">${v.mood}</p>
+          <p class="lookbook-mantra">"${v.mantra}"</p>
+        </div>
+      </button>`).join('');
+    grid.querySelectorAll('.lookbook-card').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        selectDay(btn.dataset.day);
+        showPage('shop');
+      });
+    });
+  }
+
+  function addToBag(){
+    if(!selectedDay || !selectedSize){
+      document.getElementById('sizeWarning').style.display = 'block';
+      return;
+    }
+    const v = variantByDay(selectedDay);
+    const exists = cart.find(c => c.day === v.day && c.size === selectedSize);
+    if(!exists){
+      cart.push({ day:v.day, label:v.label, hex:v.hex, size:selectedSize, key: Date.now() + Math.random() });
+    }
+    renderCart();
+    openCart();
+  }
+
+  function renderCart(){
+    const dict = I18N[currentLang];
+    document.getElementById('bagBtn').textContent = `${dict.bag} · ${cart.length}`;
+    const wrap = document.getElementById('cartItems');
+    if(cart.length === 0){
+      wrap.innerHTML = '<p class="cart-empty">Your waitlist is empty. Pick a day and a size to join it.</p>';
+    } else {
+      wrap.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <span class="cart-swatch" style="background:${item.hex}"></span>
+          <div class="cart-item-info">
+            <h4>The Jort — ${item.day}</h4>
+            <div class="meta">${item.label} · Size ${item.size}</div>
+            <button class="remove" data-key="${item.key}">Remove</button>
+          </div>
+        </div>`).join('');
+      wrap.querySelectorAll('.remove').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          cart = cart.filter(c => String(c.key) !== btn.dataset.key);
+          renderCart();
+        });
+      });
+    }
+    renderWaitlistFooter();
+  }
+
+  function renderWaitlistFooter(){
+    const footer = document.getElementById('cartFooter');
+    if(cart.length === 0){
+      footer.innerHTML = '';
+      return;
+    }
+    if(waitlistEmail){
+      footer.innerHTML = `<p class="waitlist-confirmed">We'll email <strong>${waitlistEmail}</strong> the moment these are ready.</p>`;
+    } else {
+      footer.innerHTML = `
+        <form class="waitlist-email-form" id="waitlistEmailForm">
+          <input type="email" placeholder="Your email" aria-label="Email address" required>
+          <button type="submit" class="btn btn-dark">Join Waitlist</button>
+          <span class="waitlist-note">We'll only email you when your day is ready — nothing else.</span>
+        </form>`;
+      document.getElementById('waitlistEmailForm').addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const input = e.target.querySelector('input[type="email"]');
+        waitlistEmail = input.value;
+        const picks = cart.map(c => `${c.day} (${c.label}), Size ${c.size}`).join('; ');
+        sendToBeamInbox({
+          _subject: 'BEAM Waitlist — New Signup',
+          email: waitlistEmail,
+          selections: picks || 'No day/size selected'
+        });
+        renderWaitlistFooter();
+      });
+    }
+  }
+
+  function openCart(){
+    document.getElementById('cartDrawer').classList.add('open');
+    document.getElementById('cartOverlay').classList.add('open');
+  }
+  function closeCart(){
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+  }
+
+  function applyLanguage(lang){
+    currentLang = lang;
+    const dict = I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.dataset.i18n;
+      if(!dict[key]) return;
+      el.style.transition = 'opacity .25s ease';
+      el.style.opacity = '0';
+      setTimeout(()=>{
+        el.textContent = dict[key];
+        el.style.opacity = '1';
+      }, 220);
+    });
+    document.querySelectorAll('.lang-btn').forEach(b=> b.classList.toggle('active', b.dataset.lang === lang));
+    const fitBtn = document.getElementById('fitToggle');
+    const table = document.getElementById('fitTable');
+    setTimeout(()=>{ fitBtn.textContent = table.hasAttribute('hidden') ? dict.fitGuide : dict.hideFit; }, 220);
+    renderCart();
+  }
+
+  const PAGES = ['home','shop','lookbook','about'];
+  function showPage(name){
+    if(!PAGES.includes(name)) name = 'home';
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    document.querySelectorAll('[data-page]').forEach(a=>{
+      a.classList.toggle('active', a.dataset.page === name);
+    });
+    window.scrollTo(0,0);
+    closeMobileNav();
+    if(location.hash !== '#' + name){
+      history.replaceState(null, '', '#' + name);
+    }
+  }
+
+  function openMobileNav(){ document.getElementById('mobileNav').classList.add('open'); }
+  function closeMobileNav(){ document.getElementById('mobileNav').classList.remove('open'); }
+
+  /* ---- ambient audio (fully synthesized, no external files) ---- */
+  let audioCtx = null, masterGain = null, audioNodes = null, soundOn = false;
+  const MOOD_AUDIO = {
+    Monday:{ filter:650, f1:104, f2:107 },
+    Wednesday:{ filter:900, f1:117, f2:121 },
+    Saturday:{ filter:500, f1:82, f2:83 },
+    Sunday:{ filter:1100, f1:131, f2:135 }
+  };
+
+  function ensureAudio(){
+    if(audioCtx) return;
+    try{
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(!AC){ console.warn('BEAM: Web Audio API not supported in this browser.'); return; }
+      audioCtx = new AC();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = 0;
+      masterGain.connect(audioCtx.destination);
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 800;
+      filter.connect(masterGain);
+
+      const osc1 = audioCtx.createOscillator();
+      osc1.type = 'sine'; osc1.frequency.value = 110;
+      const osc1Gain = audioCtx.createGain(); osc1Gain.gain.value = 0.5;
+      osc1.connect(osc1Gain); osc1Gain.connect(filter); osc1.start();
+
+      const osc2 = audioCtx.createOscillator();
+      osc2.type = 'sine'; osc2.frequency.value = 113.5;
+      const osc2Gain = audioCtx.createGain(); osc2Gain.gain.value = 0.35;
+      osc2.connect(osc2Gain); osc2Gain.connect(filter); osc2.start();
+
+      const bufferSize = 2 * audioCtx.sampleRate;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for(let i=0;i<bufferSize;i++){ output[i] = (Math.random()*2-1) * 0.6; }
+      const noise = audioCtx.createBufferSource();
+      noise.buffer = noiseBuffer; noise.loop = true;
+      const noiseFilter = audioCtx.createBiquadFilter();
+      noiseFilter.type = 'bandpass'; noiseFilter.frequency.value = 500; noiseFilter.Q.value = 0.6;
+      const noiseGain = audioCtx.createGain(); noiseGain.gain.value = 0.05;
+      noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(masterGain);
+      noise.start();
+
+      audioNodes = { filter:filter, osc1:osc1, osc2:osc2, baseGainTarget:0.13 };
+      scheduleChime();
+    } catch(err){
+      console.warn('BEAM: ambient sound failed to initialize —', err);
+      audioCtx = null;
+    }
+  }
+
+  function scheduleChime(){
+    const delay = 20000 + Math.random()*10000;
+    setTimeout(()=>{
+      if(soundOn && audioCtx && masterGain){
+        const t = audioCtx.currentTime;
+        const chimeOsc = audioCtx.createOscillator();
+        chimeOsc.type = 'sine';
+        chimeOsc.frequency.value = 660;
+        const chimeGain = audioCtx.createGain();
+        chimeGain.gain.setValueAtTime(0, t);
+        chimeGain.gain.linearRampToValueAtTime(0.05, t + 0.5);
+        chimeGain.gain.linearRampToValueAtTime(0, t + 2.5);
+        chimeOsc.connect(chimeGain); chimeGain.connect(masterGain);
+        chimeOsc.start(t); chimeOsc.stop(t + 3);
+      }
+      scheduleChime();
+    }, delay);
+  }
+
+  function applyMoodAudio(day){
+    if(!audioCtx || !audioNodes) return;
+    const m = MOOD_AUDIO[day];
+    if(!m) return;
+    const now = audioCtx.currentTime;
+    audioNodes.filter.frequency.setTargetAtTime(m.filter, now, 2);
+    audioNodes.osc1.frequency.setTargetAtTime(m.f1, now, 2);
+    audioNodes.osc2.frequency.setTargetAtTime(m.f2, now, 2);
+  }
+
+  function toggleSound(){
+    soundOn = !soundOn;
+    const btn = document.getElementById('soundBtn');
+    btn.classList.toggle('active', soundOn);
+    btn.setAttribute('aria-pressed', String(soundOn));
+    document.getElementById('soundSlash').style.opacity = soundOn ? '0' : '1';
+
+    try{
+      ensureAudio();
+      if(!audioCtx){ return; }
+      if(audioCtx.state === 'suspended'){ audioCtx.resume(); }
+      const target = soundOn ? audioNodes.baseGainTarget : 0;
+      const now = audioCtx.currentTime;
+      masterGain.gain.cancelScheduledValues(now);
+      masterGain.gain.setValueAtTime(masterGain.gain.value, now);
+      masterGain.gain.linearRampToValueAtTime(target, now + 2.5);
+      if(soundOn && selectedDay) applyMoodAudio(selectedDay);
+    } catch(err){
+      console.warn('BEAM: could not toggle ambient sound —', err);
+    }
+  }
+
+  /* ---- drawcord drag interaction (controls ambience) ---- */
+  let dragging = false, dragStartY = 0, dragOffset = 0;
+  function setDragOffset(px){
+    dragOffset = Math.max(0, Math.min(40, px));
+    const cordEl = document.getElementById('heroCord');
+    cordEl.style.transform = `translateY(${dragOffset}px)`;
+    cordEl.setAttribute('aria-valuenow', String(Math.round((dragOffset/40)*100)));
+    if(soundOn && audioCtx && audioNodes && masterGain){
+      const extra = (dragOffset/40) * 0.12;
+      const now = audioCtx.currentTime;
+      masterGain.gain.setTargetAtTime(audioNodes.baseGainTarget + extra, now, 0.15);
+    }
+  }
+  function releaseDrag(){
+    if(!dragging) return;
+    dragging = false;
+    const cordEl = document.getElementById('heroCord');
+    cordEl.style.transition = 'transform .6s ease';
+    setDragOffset(0);
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    renderDayGrid();
+    renderDayPills();
+    renderSizes();
+    renderLookbook();
+    renderCart();
+
+    document.querySelectorAll('[data-page]').forEach(link=>{
+      link.addEventListener('click', (e)=>{
+        e.preventDefault();
+        showPage(link.dataset.page);
+      });
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=> applyLanguage(btn.dataset.lang));
+    });
+
+    document.getElementById('bagBtn').addEventListener('click', openCart);
+    document.getElementById('cartClose').addEventListener('click', closeCart);
+    document.getElementById('cartOverlay').addEventListener('click', closeCart);
+    document.getElementById('addToBagBtn').addEventListener('click', addToBag);
+    document.getElementById('menuToggle').addEventListener('click', openMobileNav);
+    document.getElementById('mobileClose').addEventListener('click', closeMobileNav);
+    document.getElementById('soundBtn').addEventListener('click', toggleSound);
+
+    document.getElementById('fitToggle').addEventListener('click', ()=>{
+      const table = document.getElementById('fitTable');
+      const dict = I18N[currentLang];
+      if(table.hasAttribute('hidden')){
+        table.removeAttribute('hidden');
+        document.getElementById('fitToggle').textContent = dict.hideFit;
+      } else {
+        table.setAttribute('hidden','');
+        document.getElementById('fitToggle').textContent = dict.fitGuide;
+      }
+    });
+
+    document.getElementById('joinForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const emailInput = e.target.querySelector('input[type="email"]');
+      sendToBeamInbox({
+        _subject: 'BEAM — New Newsletter Signup',
+        email: emailInput ? emailInput.value : '(not captured)'
+      });
+      e.target.innerHTML = '<p class="join-thanks">You are on the list.</p>';
+    });
+
+    document.getElementById('galleryMain').style.setProperty('--vcolor', JORT_VARIANTS[0].hex);
+    renderGalleryThumbs(JORT_VARIANTS[0].day);
+    setGalleryImage(0);
+
+    const galleryMainImg = document.getElementById('galleryMainImg');
+    galleryMainImg.addEventListener('load', ()=> galleryMainImg.classList.add('loaded'));
+    galleryMainImg.addEventListener('error', function(){
+      this.classList.remove('loaded');
+    });
+
+    document.getElementById('galleryPrev').addEventListener('click', ()=> setGalleryImage(currentImageIndex - 1));
+    document.getElementById('galleryNext').addEventListener('click', ()=> setGalleryImage(currentImageIndex + 1));
+
+    const galleryMainEl = document.getElementById('galleryMain');
+    let swipeStartX = null, swipeDeltaX = 0;
+    galleryMainEl.addEventListener('pointerdown', (e)=>{ swipeStartX = e.clientX; swipeDeltaX = 0; });
+    galleryMainEl.addEventListener('pointermove', (e)=>{ if(swipeStartX !== null) swipeDeltaX = e.clientX - swipeStartX; });
+    galleryMainEl.addEventListener('pointerup', ()=>{
+      if(Math.abs(swipeDeltaX) > 40){
+        setGalleryImage(currentImageIndex + (swipeDeltaX < 0 ? 1 : -1));
+      }
+      swipeStartX = null; swipeDeltaX = 0;
+    });
+    galleryMainEl.addEventListener('pointercancel', ()=>{ swipeStartX = null; swipeDeltaX = 0; });
+
+    const cordEl = document.getElementById('heroCord');
+    cordEl.addEventListener('pointerdown', (e)=>{
+      dragging = true;
+      dragStartY = e.clientY - dragOffset;
+      cordEl.style.transition = 'none';
+      cordEl.setPointerCapture(e.pointerId);
+    });
+    cordEl.addEventListener('pointermove', (e)=>{
+      if(!dragging) return;
+      setDragOffset(e.clientY - dragStartY);
+    });
+    cordEl.addEventListener('pointerup', releaseDrag);
+    cordEl.addEventListener('pointercancel', releaseDrag);
+    cordEl.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowDown'){ e.preventDefault(); setDragOffset(dragOffset + 8); }
+      if(e.key === 'ArrowUp'){ e.preventDefault(); setDragOffset(dragOffset - 8); }
+    });
+
+    const initial = location.hash ? location.hash.replace('#','') : 'home';
+    showPage(initial);
+  });
+</script>
+
+</body>
+</html>
